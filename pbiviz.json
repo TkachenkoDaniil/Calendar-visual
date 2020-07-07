@@ -1,0 +1,27 @@
+{
+    "visual": {
+        "name": "calendarvisual",
+        "displayName": "calendar_visual",
+        "guid": "calendarvisual53A593335CAA411C89BB63C417427F66",
+        "visualClassName": "Visual",
+        "version": "1.0.0",
+        "description": "",
+        "supportUrl": "",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "2.6.0",
+    "author": {
+        "name": "",
+        "email": ""
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": [
+        "node_modules/d3/dist/d3.min.js"
+    ],
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": []
+}
