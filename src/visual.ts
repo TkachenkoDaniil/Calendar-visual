@@ -1,4 +1,3 @@
-//хня
 "use strict";
 
 import "core-js/stable";
@@ -17,21 +16,14 @@ import * as d3 from "d3";
 
 export class Visual implements IVisual {
     private target: HTMLElement;
-    private updateCount: number;
     private settings: VisualSettings;
-    private textNode: Text;
-    //private text: d3.Selection<any>;
     private date: Date;
     private newDate: Date;
     private monthText: d3.Selection<HTMLHeadingElement, unknown, null, undefined>;
-    private theadTbody: d3.Selection<HTMLTableSectionElement, unknown, HTMLElement, any>;
-    private tbody: d3.Selection<d3.BaseType, unknown, HTMLElement, any>;
     private weekday = ["so", "mo", "tu", "we", "th", "fr", "sa"];
 
     constructor(options: VisualConstructorOptions) {
-        //console.log('Visual constructor', options);
         this.target = options.element;
-        this.updateCount = 0;
         if (document) {
         // const table = d3.select(this.target)
         //     .append("table")
