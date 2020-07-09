@@ -64,7 +64,8 @@ export class Visual implements IVisual {
             .attr("type", "button")
             .on("click", () => {
                 this.date = new Date(this.date.getFullYear(), this.date.getMonth()-1, 1);
-                this.target.getElementsByTagName('tbody')[0].innerHTML = '';});
+                this.target.getElementsByTagName('tbody')[0].innerHTML = '';
+                this.fillCalendar();});
 
         const buttonRight = d3.select(this.target)
             .append("input")
@@ -73,16 +74,25 @@ export class Visual implements IVisual {
             .attr("type", "button")
             .on("click", () => {
                 this.date = new Date(this.date.getFullYear(), this.date.getMonth()+1, 1);
-                this.target.getElementsByTagName('tbody')[0].innerHTML = '';});
+                this.target.getElementsByTagName('tbody')[0].innerHTML = '';
+                this.fillCalendar();});
 
             this.date = new Date();
             this.date.setDate(1);
+            this.fillCalendar();
         }
     }
 
     public update(options: VisualUpdateOptions) {
         this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
+    }
 
+    private getAllDates(dayOfWeek: number, prevMonthLastDay: Date, lastDay: number): number[][] { // заполнение массива дней месяца. только для d3
+        let allDates: number[][];
+        return allDates;
+    }
+
+    private fillCalendar() {
         this.target.getElementsByTagName('tbody')[0].innerHTML = '';
         this.newDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
         let month = this.date.toLocaleString('ru', {
@@ -115,11 +125,6 @@ export class Visual implements IVisual {
         }
         row += '</tr>'
         this.target.getElementsByTagName('tbody')[0].innerHTML += row;
-    }
-
-    private getAllDates(dayOfWeek: number, prevMonthLastDay: Date, lastDay: number): number[][] { // заполнение массива дней месяца. только для d3
-        let allDates: number[][];
-        return allDates;
     }
 
     private static parseSettings(dataView: DataView): VisualSettings {
