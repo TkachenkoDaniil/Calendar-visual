@@ -62,6 +62,7 @@ export class Visual implements IVisual {
         //     .append("td")
         //     .text(d => d);
 
+        //Лучше не вставлять html строки хардкодом, а использовать методы d3 для этого.
         let row = "<table class='table' id='calendar' border='1'><thead><tr><th>su</th><th>mo</th><th>tu</th><th>we</th><th>th</th><th>fr</th><th>sa</th></tr></thead><tbody></tbody></table>";
         this.target.innerHTML += row;
 
@@ -120,6 +121,8 @@ export class Visual implements IVisual {
         let categories = view.categories[0];
         let values = categories.values;
 
+        //лучше сделать так
+        //for (let i = 0; i < values.length; i++) { 
         for (let i = 0, len = values.length; i < len; i++) {
             let currentDate = new Date(values[i].toString());
             this.arrayDate.push(currentDate);
