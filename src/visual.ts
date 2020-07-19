@@ -21,49 +21,56 @@ export class Visual implements IVisual {
     private newDate: Date;
     private monthText: d3.Selection<HTMLHeadingElement, unknown, null, undefined>;
     private yearText: d3.Selection<HTMLHeadingElement, unknown, null, undefined>;
-    private weekday = ["so", "mo", "tu", "we", "th", "fr", "sa"];
-    private weekdays = ["sos", "mos", "tus", "wes", "ths", "frs", "sas"];
-    private thead: d3.Selection<HTMLTableRowElement, unknown, HTMLElement, any>;
+    private weekdays = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+    //private weekdays = ["sos", "mos", "tus", "wes", "ths", "frs", "sas"];
+    private theadRow: d3.Selection<HTMLTableRowElement, unknown, HTMLElement, any>;
     private arrayDate:Date[] = new Array();
 
     constructor(options: VisualConstructorOptions) {
         this.target = options.element;
         if (document) {
-        // var table = d3.select(this.target)
-        //     .append("table")
-        //     .attr("class", "table")
-        //     .attr("id", "calendar")
-        //     .attr("id", 1);
 
-        // var theadTbody = d3.select("table")
-        //     .append("thead");
-        // var shyr = d3.select("table")
-        //     .append("tbody");
+            //debugger;
 
-        // this.thead = d3.select("thead")
-        //     .append("tr");
+            try {
 
-        // var tr = this.thead.selectAll("tr");
+                let table = d3.select(this.target)
+                    .append("table")
+                    .classed("table", true)
+                    .attr("id", "calendar");
 
-        // var das = d3.selectAll("th")
-        //     .data(this.weekday);
-        // das
-        //     .enter()
-        //     .append("th")
-        //     .text(d => d);
+                let theadTbody = table
+                    .append("thead");
 
-        // var tbody = theadTbody.select("tbody")
-        //     .append("tr")
+                let tbody = d3.select("table")
+                    .append("tbody");
 
-        //     .select("tr")
-        //     .selectAll("td")
-        //     .data(this.weekdays)
-        //     .enter()
-        //     .append("td")
-        //     .text(d => d);
+                this.theadRow = theadTbody
+                    .append("tr");
+
+                this.theadRow
+                    .selectAll("th")
+                    .data(this.weekdays)
+                    .enter()
+                    .append("th")
+                    .text(d => d);
+
+                tbody
+                    .append("tr")
+                    .selectAll("td")
+                    .data(this.weekdays)
+                    .enter()
+                    .append("td")
+                    .text(d => d);
+
+
+            }
+            catch (e) {
+                debugger;
+            }
 
         //Лучше не вставлять html строки хардкодом, а использовать методы d3 для этого.
-        let row = "<table class='table' id='calendar' border='1'><thead><tr><th>su</th><th>mo</th><th>tu</th><th>we</th><th>th</th><th>fr</th><th>sa</th></tr></thead><tbody></tbody></table>";
+        /*let row = "<table class='table' id='calendar' border='1'><thead><tr><th>su</th><th>mo</th><th>tu</th><th>we</th><th>th</th><th>fr</th><th>sa</th></tr></thead><tbody></tbody></table>";
         this.target.innerHTML += row;
 
         this.monthText = d3.select(this.target)
@@ -96,6 +103,8 @@ export class Visual implements IVisual {
             this.date.setDate(1);
 
             this.fillCalendar();
+
+            */
         }
     }
 
@@ -117,6 +126,8 @@ export class Visual implements IVisual {
             || !dv[0].categorical.categories[0].values)
             return this.arrayDate;
 
+            debugger;
+
         let view = dv[0].categorical;
         let categories = view.categories[0];
         let values = categories.values;
@@ -124,7 +135,7 @@ export class Visual implements IVisual {
         //лучше сделать так
         //for (let i = 0; i < values.length; i++) { 
         for (let i = 0, len = values.length; i < len; i++) {
-            let currentDate = new Date(values[i].toString());
+            let currentDate: Date = <Date>values[i];//new Date(values[i].toString());
             this.arrayDate.push(currentDate);
         }
 
