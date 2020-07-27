@@ -56,6 +56,17 @@
                     }
                 }
             }
+        },
+        "highlightWeekdays" : {
+            "displayName": "Highlight weekdays",
+            "properties": {
+                "show": {
+                    "displayName": "Weekdays",
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
         }
     },
     "dataViewMappings": [
